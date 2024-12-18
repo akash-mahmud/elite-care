@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import { cn } from "@/lib/utils";
 import "./globals.css";
+import { ThemeProvider } from "@/components/theme-provider"
 
 export const metadata: Metadata = {
   title: "Elite care",
@@ -25,7 +26,14 @@ export default function RootLayout({
           FontSans.variable
         )}
       >
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+       
+          >
+
         {children}
+          </ThemeProvider>
       </body>
     </html>
   );
