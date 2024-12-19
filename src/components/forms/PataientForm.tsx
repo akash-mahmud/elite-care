@@ -10,6 +10,7 @@ import SubmitButton from "../SubmitButton";
 import { useState } from "react";
 import { UserFormValidation } from "@/lib/validation";
 import { useRouter } from "next/navigation";
+import { createUser } from "@/lib/actions/patient.actions";
 export enum FormFieldType {
   INPUT = "input",
   TEXTAREA = "textarea",
@@ -37,13 +38,17 @@ const PataientForm = () => {
   async function onSubmit(values: z.infer<typeof UserFormValidation>) {
     setisLoading(true);
     try {
-      // const user = createUser({ ...values });
-      // if (user) {
-      //   router.push(`/pataients/${user.$id}/register`);
-      // }
+      const user = await createUser({ ...values });
+      console.log(user);
+      
+      if (user) {
+        router.push(`/pataients/${user.$id}/register`);
+      }
     } catch (error) {
       console.log(error);
     }
+    setisLoading(false);
+
   }
 
   return (
